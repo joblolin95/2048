@@ -13,19 +13,15 @@ public class GameEngine {
     }
     
     private boolean isFull(){
-        boolean full = true;
-        int row = 0;
-        int col = 0;
-        while(full && row < array.length && col < array[row].length){
-            if(array[row][col] == 0){
-                full = false;
-            }
-            if(col % 3 == 0 && col != 0){
-                row++;
-                col++;
+        // code to be cleaned up later
+        for(int i = 0; i < array.length; i++){
+            for(int j = 0; j < array[i].length; j++){
+                if(array[i][j] == 0){
+                    return false;
+                }
             }
         }
-        return full;
+        return true;
     }// isFull
     
     
@@ -233,12 +229,12 @@ public class GameEngine {
     public void endGame(){
         System.out.println("GAME OVER");
         System.out.println("Score: ");
-        System.out.println("Play again? (y/n");
-        Scanner input = new Scanner(System.in);
-        String response = input.next();
-        if(response.equalsIgnoreCase("y")){
-            run();
-        }
+//        System.out.println("Play again? (y/n");
+//        Scanner input = new Scanner(System.in);
+//        String response = input.next();
+//        if(response.equalsIgnoreCase("y")){
+//            run();
+//        }
     }
     
     
