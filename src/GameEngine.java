@@ -1,11 +1,5 @@
-/*
- * Programmer: Joseph Blaine Olin
- */
+import java.util.Scanner;
 
-/**
- *
- * @author Blaine's Laptop
- */
 public class GameEngine {
     private int [][] array;
     private int direction;
@@ -197,9 +191,35 @@ public class GameEngine {
         }// switch
     }// shift
     
+    public void printOut(){
+        for(int[] row: array){
+            for(int el: row){
+                System.out.printf("%5s ", el);
+            }
+            System.out.println();
+        }
+    }
+    
+    public void run(){
+        
+        addTile();
+        addTile();
+        printOut();
+        
+        
+    }// run
     
     public void endGame(){
-        
+        System.out.println("GAME OVER");
+        System.out.println("Score: ");
+        System.out.println("Play again? (y/n");
+        Scanner input = new Scanner(System.in);
+        String response = input.next();
+        if(response.equalsIgnoreCase("y")){
+            run();
+        }
     }
+    
+    
     
 }// GameEngine class
