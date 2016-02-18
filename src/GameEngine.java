@@ -44,10 +44,11 @@ public class GameEngine {
             endGame();
         }
         // returns true if tile was added, false if not
-        return !continu;
+        return continu;
     }
     
     public void shift(){
+        emptyMerges();
         switch(direction) {
             case 0:
                 for(int row = 0; row < 4; row++){
@@ -65,7 +66,7 @@ public class GameEngine {
                         if(index <= 0){
                             index++;
                         }
-                        if(next == el && !merges[row][index-1]){
+                        if(next == el && !merges[row][index-1] && el != 0){
                             array[row][index - 1] = el * 2;
                             array[row][index] = 0;
                             merges[row][index-1] = true;
@@ -100,7 +101,7 @@ public class GameEngine {
                         if(index <= 0){
                             index++;
                         }
-                        if(next == el && !merges[index-1][col]){
+                        if(next == el && !merges[index-1][col] && el != 0){
                             array[index-1][col] = el * 2;
                             array[index][col] = 0;
                             merges[index-1][col] = true;
@@ -135,7 +136,7 @@ public class GameEngine {
                         if(index >= 3){
                             index--;
                         }
-                        if(next == el && !merges[row][index+1]){
+                        if(next == el && !merges[row][index+1] && el != 0){
                             array[row][index + 1] = el * 2;
                             array[row][index] = 0;
                             merges[row][index+1] = true;
@@ -170,7 +171,7 @@ public class GameEngine {
                         if(index >= 3){
                             index++;
                         }
-                        if(next == el && !merges[index+1][col]){
+                        if(next == el && !merges[index+1][col] && el != 0){
                             array[index+1][col] = el * 2;
                             array[index][col] = 0;
                             merges[index+1][col] = true;
@@ -203,20 +204,27 @@ public class GameEngine {
         }
     }
     
+    public void emptyMerges(){
+        for(int i = 0; i < merges.length; i++){
+            for(int j = 0; j < merges.length; j++){
+                merges[i][j] = false;
+            }
+        }
+    }
+    
     public void run(){
-        
         addTile();
         boolean go = addTile();
-        
          
         while(go){
             printOut();
             System.out.println("\n###################");
-            System.out.println("Left = 1  Up = 2  Right = 3  Down = 4");
+            System.out.println("Left = 0  Up = 1  Right = 2 Down = 3");
             Scanner input = new Scanner(System.in);
             direction = input.nextInt();
             shift();
             go = addTile();
+            System.out.println("\n###################");
         }
         
         
