@@ -46,7 +46,7 @@ public class GameEngine {
     public void shift(){
         emptyMerges();
         switch(direction) {
-            case 0:
+            case 1:
                 for(int row = 0; row < 4; row++){
                     for(int col = 1; col < 4; col++){
                         int index = col;
@@ -81,7 +81,7 @@ public class GameEngine {
                     }// for
                 }//for
                 break;
-            case 1:
+            case 2:
                 for(int row = 1; row < 4; row++){
                     for(int col = 0; col < 4; col++){
                         int index = row;
@@ -116,7 +116,7 @@ public class GameEngine {
                     }// for
                 }//for
                 break;
-            case 2:
+            case 3:
                 for(int row = 0; row < 4; row++){
                     for(int col = array.length-2; col >= 0; col--){
                         int index = col;
@@ -151,7 +151,7 @@ public class GameEngine {
                     }// for
                 }//for
                 break;
-            case 3:
+            case 4:
                 for(int row = array.length - 2; row >= 0; row--){
                     for(int col = 0; col < 4; col++){
                         int index = row;
@@ -215,9 +215,13 @@ public class GameEngine {
         while(go){
             printOut();
             System.out.println("\n###################");
-            System.out.println("Left = 0  Up = 1  Right = 2 Down = 3");
+            System.out.println("Left = 1  Up = 2  Right = 3 Down = 43");
             Scanner input = new Scanner(System.in);
             direction = input.nextInt();
+            while(direction < 1 || direction > 4){
+                System.out.println("Invalid Direction\nEnter Again\n");
+                direction = input.nextInt();
+            }
             shift();
             go = addTile();
             System.out.println("\n###################");
