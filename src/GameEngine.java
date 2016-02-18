@@ -29,8 +29,9 @@ public class GameEngine {
     }// isFull
     
     
-    private void addTile(){
-        if(!isFull()){
+    private boolean addTile(){
+        boolean continu;
+        if(continu=!isFull()){
             int rowRand = 0;
             int colRand = 0;
             do {
@@ -40,8 +41,10 @@ public class GameEngine {
             array[rowRand][colRand] = 2;
         }
         else {
-            // Game Over
+            endGame();
         }
+        // returns true if tile was added, false if not
+        return !continu;
     }
     
     public void shift(){
@@ -203,8 +206,18 @@ public class GameEngine {
     public void run(){
         
         addTile();
-        addTile();
-        printOut();
+        boolean go = addTile();
+        
+         
+        while(go){
+            printOut();
+            System.out.println("\n###################");
+            System.out.println("Left = 1  Up = 2  Right = 3  Down = 4");
+            Scanner input = new Scanner(System.in);
+            direction = input.nextInt();
+            shift();
+            go = addTile();
+        }
         
         
     }// run
