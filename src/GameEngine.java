@@ -202,9 +202,9 @@ public class GameEngine {
     
     // prints out the current state of the game board
     public void printOut(){
-        for(int[] row: array){
-            for(int el: row){
-                System.out.printf("%5s ", el);
+        for(int row = 0; row < array.length; row++){
+            for(int col = 0; col < array[row].length; col++){
+                System.out.printf("%5s ", array[row][col]);
             }
             System.out.println();
         }
@@ -227,7 +227,7 @@ public class GameEngine {
         while(go){
             printOut();
             System.out.println("\n###################");
-            System.out.println("Left = 1  Up = 2  Right = 3 Down = 43");
+            System.out.println("Left = 1  Up = 2  Right = 3 Down = 4");
             Scanner input = new Scanner(System.in);
             direction = input.nextInt();
             while(direction < 1 || direction > 4){
