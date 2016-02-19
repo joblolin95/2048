@@ -1,3 +1,8 @@
+/* Author: Joseph Blaine Olin
+ * Date Created: February 18, 2016
+ *
+*/
+
 import java.util.Scanner;
 
 public class GameEngine {
@@ -6,12 +11,14 @@ public class GameEngine {
     private boolean [][] merges;
     private int boardSize = 4;
     
+    // Constructor for GameEngine
     public GameEngine(){
         array = new int[boardSize][boardSize];
         merges = new boolean[boardSize][boardSize];
         direction = -1;
     }
     
+    // Method to check if the game board is full
     private boolean isFull(){
         // code to be cleaned up later
         for(int i = 0; i < array.length; i++){
@@ -24,7 +31,8 @@ public class GameEngine {
         return true;
     }// isFull
     
-    
+    // returns true if a tile with the number 2 was successfully added to the 
+    // board. Returns false otherwise.
     private boolean addTile(){
         boolean continu;
         if(continu=!isFull()){
@@ -43,6 +51,7 @@ public class GameEngine {
         return continu;
     }
     
+    // performs the shifting and merging of the tiles
     public void shift(){
         emptyMerges();
         switch(direction) {
@@ -191,6 +200,7 @@ public class GameEngine {
         }// switch
     }// shift
     
+    // prints out the current state of the game board
     public void printOut(){
         for(int[] row: array){
             for(int el: row){
@@ -200,6 +210,7 @@ public class GameEngine {
         }
     }
     
+    // empties the merges list for another shift
     public void emptyMerges(){
         for(int i = 0; i < merges.length; i++){
             for(int j = 0; j < merges.length; j++){
@@ -208,6 +219,7 @@ public class GameEngine {
         }
     }
     
+    // This method dispatches commands to start the game and keep it going
     public void run(){
         addTile();
         boolean go = addTile();
@@ -227,18 +239,21 @@ public class GameEngine {
             System.out.println("\n###################");
         }
         
-        
     }// run
     
-    public void endGame(){
-        System.out.println("GAME OVER");
-        System.out.println("Score: ");
+//    public void askToRestart(){
 //        System.out.println("Play again? (y/n");
 //        Scanner input = new Scanner(System.in);
 //        String response = input.next();
 //        if(response.equalsIgnoreCase("y")){
 //            run();
 //        }
+//    }
+    
+    // This method displays the message at the end of the game.
+    public void endGame(){
+        System.out.println("GAME OVER");
+        System.out.println("Score: ");
     }
     
     
