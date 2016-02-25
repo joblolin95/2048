@@ -3,7 +3,7 @@
  *
 */
 
-import java.util.Scanner;
+import java.util.*;
 
 public class GameEngine {
     private int [][] array;
@@ -38,9 +38,10 @@ public class GameEngine {
         if(continu=!isFull()){
             int rowRand = 0;
             int colRand = 0;
+            Random rand = new Random();
             do {
-                rowRand = (int)(Math.random()*3);
-                colRand = (int)(Math.random()*3);
+                rowRand = rand.nextInt(boardSize);
+                colRand = rand.nextInt(boardSize);
             }while(array[rowRand][colRand] != 0);
             array[rowRand][colRand] = 2;
         }
@@ -219,6 +220,17 @@ public class GameEngine {
         }
     }
     
+    public boolean unchangedBoard(int[][] arrCopy){
+        
+        int length = 0;
+        boolean unchanged = true;
+        while(length < array.length && unchanged){
+            unchanged = Arrays.equals(arrCopy[length], array[length]);
+            length++;
+        }
+        return unchanged;
+    }
+    
     // This method dispatches commands to start the game and keep it going
     public void run(){
         addTile();
@@ -228,13 +240,30 @@ public class GameEngine {
             printOut();
             System.out.println("\n###################");
             System.out.println("Left = 1  Up = 2  Right = 3 Down = 4");
-            Scanner input = new Scanner(System.in);
+            Scanner input = new Scanner(System.in);           
+            int [][] arrCopy = new int[boardSize][boardSize];
+            for(int i = 0; i < array.length; i++){
+                for(int j = 0; j < array[i].length; j++){
+                    arrCopy[i][j] = array[i][j];
+                }
+            }
             direction = input.nextInt();
             while(direction < 1 || direction > 4){
                 System.out.println("Invalid Direction\nEnter Again\n");
                 direction = input.nextInt();
             }
             shift();
+            
+            while(unchangedBoard(arrCopy)){
+                direction = input.nextInt();
+                while(direction < 1 || direction > 4){
+                    System.out.println("Invalid Direction\nEnter Again\n");
+                    direction = input.nextInt();
+                }
+                shift();
+            }// while
+            
+            
             go = addTile();
             System.out.println("\n###################");
         }
